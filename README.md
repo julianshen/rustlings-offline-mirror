@@ -15,6 +15,23 @@ docker pull ghcr.io/julianshen/rustlings-offline-mirror:latest
 docker run -d -p 8080:8080 ghcr.io/julianshen/rustlings-offline-mirror:latest
 ```
 
+### Install Rust toolchain using the mirror
+
+If you need to install or update the Rust toolchain in an offline environment, configure rustup to use this mirror:
+
+```bash
+export RUSTUP_DIST_SERVER=http://localhost:8080/rustup
+export RUSTUP_UPDATE_ROOT=http://localhost:8080/rustup
+
+# Install rustup (if not already installed)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Or update an existing installation
+rustup update stable
+```
+
+You can add these exports to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.) to make them persistent.
+
 ### Configure cargo to use the mirror
 
 Add the following to your `~/.cargo/config.toml`:
